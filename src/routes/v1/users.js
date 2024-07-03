@@ -11,6 +11,11 @@ router.get(
   validate(usersValidation.getAllUsers),
   usersController.getAllUsers
 );
+router.get(
+  "/:id",
+  validate(usersValidation.getEachUser),
+  usersController.getEachUser
+);
 
 module.exports = router;
 
@@ -42,6 +47,24 @@ module.exports = router;
  *           minimum: 1
  *           default: 1
  *         description: Page number
+ *     responses:
+ *       "200":
+ *         description: OK
+ */
+
+/**
+ * @swagger
+ * /users/{id}:
+ *   get:
+ *     summary: Get each user by id
+ *     tags: [Users]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: User id
  *     responses:
  *       "200":
  *         description: OK

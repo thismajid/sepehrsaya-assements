@@ -9,6 +9,16 @@ const getAllUsers = catchAsync(async (req, res, next) => {
   res.sendResponse(httpStatus.OK, { ...results });
 });
 
+const getEachUser = catchAsync(async (req, res, next) => {
+  await usersService.isExistUser({ ...req.params });
+  const result = await usersService.getEachUser({
+    ...req.params,
+  });
+
+  res.sendResponse(httpStatus.OK, { ...result });
+});
+
 module.exports = {
   getAllUsers,
+  getEachUser,
 };
