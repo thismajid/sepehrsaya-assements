@@ -2,8 +2,9 @@ const response = (req, res, next) => {
   // Function to send a standardized response
   res.sendResponse = (statusCode, data, message = "") => {
     const response = {
-      timestamp: new Date().toISOString(),
+      success: true,
       status: statusCode,
+      timestamp: new Date().toISOString(),
       data: data,
       message,
     };
