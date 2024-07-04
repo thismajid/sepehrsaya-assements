@@ -20,13 +20,13 @@ class UserController {
   });
 
   createUser = catchAsync(async (req, res) => {
-    await this.userService.createUser(req.body);
-    res.sendResponse(httpStatus.CREATED, {});
+    const user = await this.userService.createUser(req.body);
+    res.sendResponse(httpStatus.CREATED, { ...user.toJSON() });
   });
 
   updateUser = catchAsync(async (req, res) => {
-    await this.userService.updateUser(req.params.id, req.body);
-    res.sendResponse(httpStatus.OK, {});
+    const user = await this.userService.updateUser(req.params.id, req.body);
+    res.sendResponse(httpStatus.OK, { ...user.toJSON() });
   });
 
   deleteUser = catchAsync(async (req, res) => {

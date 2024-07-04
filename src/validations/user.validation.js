@@ -30,15 +30,16 @@ const schemas = {
     password: Joi.string().required().min(6),
   },
 
-  getAllUsers: {
+  optionalUsers: {
     firstname: Joi.string(),
     lastname: Joi.string(),
     email: Joi.string(),
+    password: Joi.string(),
   },
 };
 
 const validations = {
-  getAllUsers: {
+  optionalUsers: {
     query: Joi.object({
       ...schemas.pagination,
       ...schemas.getAllUsers,
@@ -58,9 +59,11 @@ const validations = {
   },
 
   updateUser: {
-    params: schemas.objectId,
+    params: Joi.object({
+      id: schemas.objectId,
+    }),
     body: Joi.object({
-      ...schemas.user,
+      ...schemas.optionalUsers,
     }),
   },
 };

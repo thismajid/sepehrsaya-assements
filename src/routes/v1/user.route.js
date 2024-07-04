@@ -147,6 +147,7 @@ module.exports = router;
  *               - firstname
  *               - lastname
  *               - email
+ *               - password
  *             properties:
  *               firstname:
  *                 type: string
@@ -154,10 +155,13 @@ module.exports = router;
  *                 type: string
  *               email:
  *                 type: string
+ *               password:
+ *                 type: string
  *             example:
  *               firstname: firstname
  *               lastname: lastname
  *               email: unique_email@email.com
+ *               password: strong123password
  *     responses:
  *       "200":
  *         description: OK

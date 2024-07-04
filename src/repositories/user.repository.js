@@ -18,7 +18,9 @@ class UserRepository {
   }
 
   async update(id, userData) {
-    return UserModel.findByIdAndUpdate(id, userData, { new: true });
+    const user = await this.findById(id);
+    Object.assign(user, userData);
+    return user.save();
   }
 
   async deleteById(id) {

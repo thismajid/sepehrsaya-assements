@@ -41,6 +41,12 @@ class UserService {
     if (!existingUser) {
       throw new ApiError(httpStatus.NOT_FOUND, `User with id: ${id} not found`);
     }
+    const existingUserWithEmail = await this.userRepository.findByEmail(
+      userData.email
+    );
+    if (existingUserWithEmail && existingUserWithEmail.id.toString() !== id) {
+      throw new ApiError(httpStatus.BAD_REQUEST, "Email already taken");
+    }
     return await this.userRepository.update(id, userData);
   }
 
