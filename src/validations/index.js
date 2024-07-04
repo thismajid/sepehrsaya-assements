@@ -1,3 +1,3 @@
 module.exports = {
-  usersValidation: require("./users"),
+  UserValidation: require("./user.validation"),
 };

@@ -1,11 +1,11 @@
 const express = require("express");
 
-const apiDocs = require("./docs");
-const usersRoute = require("./users");
+const apiDocs = require("./doc.route");
+const userRoutes = require("./user.route");
 
 const router = express.Router();
 
 router.use("/docs", apiDocs);
-router.use("/users", usersRoute);
+router.use("/users", userRoutes);
 
 module.exports = router;
