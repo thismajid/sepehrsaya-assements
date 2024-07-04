@@ -1,7 +1,7 @@
 const { faker } = require("@faker-js/faker");
 
-const setupTestDB = require("./setupTestDB");
-const User = require("../models/user.model");
+const setupTestDB = require("../setupTestDB");
+const User = require("../../models/user.model");
 
 setupTestDB();
 
