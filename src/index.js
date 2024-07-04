@@ -10,6 +10,7 @@ mongoose.connect(mainConfigs.mongoose.uri).then(() => {
   logger.info("Connected to MongoDB");
   server = app.listen(mainConfigs.port, () => {
     logger.info(`Server is running on: ${mainConfigs.realUrl}`);
+    console.log(`Swagger is accessible on: ${mainConfigs.realUrl}/api/v1/docs`);
   });
 });
 

@@ -4,7 +4,9 @@
   "description": "",
   "main": "./src/index",
   "scripts": {
-    "start": "node ./src/index.js"
+    "start": "cross-env NODE_ENV='production' node ./src/index.js",
+    "start:dev": "cross-env NODE_ENV='development' node --watch ./src/index.js",
+    "test": "jest"
   },
   "keywords": [
     "nodejs"
@@ -12,17 +14,32 @@
   "author": "Majid Khorshidian <mkhorshidian72@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "@faker-js/faker": "^8.4.1",
+    "bcryptjs": "^2.4.3",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "express-mongo-sanitize": "^2.2.0",
     "helmet": "^7.1.0",
     "http-status": "^1.7.4",
+    "jest-mock-extended": "^3.0.7",
     "joi": "^17.13.3",
     "logger": "^0.0.1",
     "mongoose": "^8.4.4",
     "morgan": "^1.10.0",
+    "node-mocks-http": "^1.15.0",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "validator": "^13.12.0",
     "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
+  },
+  "jest": {
+    "testEnvironment": "node"
   }
 }
