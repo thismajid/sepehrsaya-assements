@@ -13,6 +13,10 @@ class UserRepository {
     return UserModel.findOne({ email });
   }
 
+  async findAdmin(role = "admin") {
+    return UserModel.findOne({ role });
+  }
+
   async create(userData) {
     return UserModel.create(userData);
   }

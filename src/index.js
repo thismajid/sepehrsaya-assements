@@ -2,6 +2,7 @@ const mongoose = require("mongoose");
 
 const app = require("./app");
 const { mainConfigs, logger } = require("./configs");
+const { seedDb } = require("./utils");
 
 let server;
 const mongooseDebug = mainConfigs.env !== "production" ? true : false;
@@ -11,6 +12,7 @@ mongoose.connect(mainConfigs.mongoose.uri).then(() => {
   server = app.listen(mainConfigs.port, () => {
     logger.info(`Server is running on: ${mainConfigs.realUrl}`);
     console.log(`Swagger is accessible on: ${mainConfigs.realUrl}/api/v1/docs`);
+    seedDb();
   });
 });
 
