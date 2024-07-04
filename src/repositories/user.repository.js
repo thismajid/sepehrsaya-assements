@@ -16,6 +16,10 @@ class UserRepository {
   async create(userData) {
     return UserModel.create(userData);
   }
+
+  async deleteById(id) {
+    return UserModel.findByIdAndDelete(id);
+  }
 }
 
 module.exports = UserRepository;

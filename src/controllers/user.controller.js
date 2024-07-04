@@ -23,6 +23,11 @@ class UserController {
     await this.userService.createUser(req.body);
     res.sendResponse(httpStatus.CREATED, {});
   });
+
+  deleteUser = catchAsync(async (req, res) => {
+    await this.userService.deleteUser(req.params.id);
+    res.sendResponse(httpStatus.OK, {});
+  });
 }
 
 const userRepository = new UserRepository();

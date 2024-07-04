@@ -29,6 +29,14 @@ class UserService {
     }
     return this.userRepository.create(userData);
   }
+
+  async deleteUser(id) {
+    const user = await this.userRepository.findById(id);
+    if (!user) {
+      throw new ApiError(httpStatus.NOT_FOUND, `User with id: ${id} not found`);
+    }
+    await this.userRepository.deleteById(id);
+  }
 }
 
 module.exports = UserService;
