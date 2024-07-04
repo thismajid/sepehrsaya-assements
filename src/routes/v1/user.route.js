@@ -1,10 +1,12 @@
 const express = require("express");
 
-const { validate } = require("../../middlewares");
+const { validate, authMiddleware } = require("../../middlewares");
 const { UserValidation } = require("../../validations");
 const { UserController } = require("../../controllers");
 
 const router = express.Router();
+
+router.use(authMiddleware());
 
 router
   .route("/")
@@ -32,6 +34,8 @@ module.exports = router;
  *   get:
  *     summary: Get all users
  *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: query
  *         name: firstname
@@ -76,6 +80,8 @@ module.exports = router;
  *   get:
  *     summary: Get each user by id
  *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -94,6 +100,8 @@ module.exports = router;
  *   post:
  *     summary: Create new user
  *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
  *     requestBody:
  *       required: true
  *       content:
@@ -130,6 +138,8 @@ module.exports = router;
  *   put:
  *     summary: Update exist user
  *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
@@ -173,6 +183,8 @@ module.exports = router;
  *   delete:
  *     summary: Delete each user by id
  *     tags: [Users]
+ *     security:
+ *       - bearerAuth: []
  *     parameters:
  *       - in: path
  *         name: id
