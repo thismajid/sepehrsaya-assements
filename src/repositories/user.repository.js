@@ -17,6 +17,10 @@ class UserRepository {
     return UserModel.create(userData);
   }
 
+  async update(id, userData) {
+    return UserModel.findByIdAndUpdate(id, userData, { new: true });
+  }
+
   async deleteById(id) {
     return UserModel.findByIdAndDelete(id);
   }

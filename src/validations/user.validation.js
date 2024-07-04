@@ -16,25 +16,33 @@ const objectId = Joi.extend((joi) => ({
 
 // Reusable schemas
 const schemas = {
-  pagination: Joi.object({
+  pagination: {
     page: Joi.number().integer().min(1).default(1),
     limit: Joi.number().integer().min(1).max(100).default(10),
-  }),
+  },
 
   objectId: objectId.objectId().required(),
 
-  user: Joi.object({
+  user: {
     firstname: Joi.string().required().trim(),
     lastname: Joi.string().required().trim(),
     email: Joi.string().email().required().lowercase(),
     password: Joi.string().required().min(6),
-  }),
+  },
+
+  getAllUsers: {
+    firstname: Joi.string(),
+    lastname: Joi.string(),
+    email: Joi.string(),
+  },
 };
 
-// Validation schemas for different routes
 const validations = {
   getAllUsers: {
-    query: schemas.pagination,
+    query: Joi.object({
+      ...schemas.pagination,
+      ...schemas.getAllUsers,
+    }),
   },
 
   getEachUser: {
@@ -44,7 +52,16 @@ const validations = {
   },
 
   createUser: {
-    body: schemas.user,
+    body: Joi.object({
+      ...schemas.user,
+    }),
+  },
+
+  updateUser: {
+    params: schemas.objectId,
+    body: Joi.object({
+      ...schemas.user,
+    }),
   },
 };
 

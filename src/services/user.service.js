@@ -10,7 +10,13 @@ class UserService {
     this.userRepository = userRepository;
   }
 
-  async getAllUsers(filter, pagination) {
+  async getAllUsers({ firstname, lastname, email, page = 1, limit = 10 }) {
+    const filter = {
+      ...(firstname && { firstname: { $regex: new RegExp(firstname, "i") } }),
+      ...(lastname && { lastname: { $regex: new RegExp(lastname, "i") } }),
+      ...(email && { email: { $regex: new RegExp(email, "i") } }),
+    };
+    const pagination = { page, limit };
     return this.userRepository.findAll(filter, pagination);
   }
 
@@ -28,6 +34,14 @@ class UserService {
       throw new ApiError(httpStatus.BAD_REQUEST, "User already exists");
     }
     return this.userRepository.create(userData);
+  }
+
+  async updateUser(id, userData) {
+    const existingUser = await this.userRepository.findById(id);
+    if (!existingUser) {
+      throw new ApiError(httpStatus.NOT_FOUND, `User with id: ${id} not found`);
+    }
+    return await this.userRepository.update(id, userData);
   }
 
   async deleteUser(id) {

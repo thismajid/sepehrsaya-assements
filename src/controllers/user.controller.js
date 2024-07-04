@@ -24,6 +24,11 @@ class UserController {
     res.sendResponse(httpStatus.CREATED, {});
   });
 
+  updateUser = catchAsync(async (req, res) => {
+    await this.userService.updateUser(req.params.id, req.body);
+    res.sendResponse(httpStatus.OK, {});
+  });
+
   deleteUser = catchAsync(async (req, res) => {
     await this.userService.deleteUser(req.params.id);
     res.sendResponse(httpStatus.OK, {});
