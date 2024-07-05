@@ -9,6 +9,8 @@ services:
       - PORT=3000
       - MONGODB_URL=mongodb://mongodb:27017/sepehrsaya
       - REAL_URL=http://localhost:3000
+      - JWT_SECRET=strong123secret
+      - JWT_ACCESS_EXPIRATION_MINUTES=10
     ports:
       - "3000:3000"
     depends_on:
