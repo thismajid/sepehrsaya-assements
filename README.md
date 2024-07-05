@@ -16,7 +16,7 @@ This project is an Express.js application with MongoDB integration, featuring us
 - Node.js (for local development)
 - MongoDB (for local development without Docker)
 
-## Getting Started (With Docker)
+## Running the Project With Docker
 
 1. Clone the repository:
 
