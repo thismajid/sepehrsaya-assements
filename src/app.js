@@ -3,6 +3,7 @@ const helmet = require("helmet");
 const expressMongoSanitize = require("express-mongo-sanitize");
 const compression = require("compression");
 const cors = require("cors");
+const xssShield = require("xss-shield");
 const httpStatus = require("http-status");
 
 const { mainConfigs, morgan } = require("./configs");
@@ -33,6 +34,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // sanitize request data
 app.use(expressMongoSanitize());
+
+// prevent xss
+app.use(xssShield());
 
 // gzip compression
 app.use(compression());
