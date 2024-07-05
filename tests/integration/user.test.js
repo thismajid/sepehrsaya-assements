@@ -235,7 +235,7 @@ describe("User routes", () => {
         .send(updateBody)
         .expect(httpStatus.OK);
 
-      expect(res.body).not.toHaveProperty("password");
+      expect(res.body.data).not.toHaveProperty("password");
       expect(res.body.data).toEqual({
         id: userOne._id.toHexString(),
         firstname: updateBody.firstname,
