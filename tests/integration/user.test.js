@@ -2,10 +2,10 @@ const request = require("supertest");
 const { faker } = require("@faker-js/faker");
 const httpStatus = require("http-status");
 
-const app = require("../../app");
+const app = require("../../src/app");
 const setupTestDB = require("../setupTestDB");
-const User = require("../../models/user.model");
-const { seedDb } = require("../../utils");
+const User = require("../../src/models/user.model");
+const { seedDb } = require("../../src/utils");
 
 setupTestDB();
 
