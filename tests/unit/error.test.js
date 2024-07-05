@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 const httpStatus = require("http-status");
 const httpMocks = require("node-mocks-http");
-const { errorConverter, errorHandler } = require("../../middlewares/error");
-const ApiError = require("../../utils/ApiError");
-const config = require("../../configs/main");
-const logger = require("../../configs/logger");
+
+const { errorConverter, errorHandler } = require("../../src/middlewares");
+const { ApiError } = require("../../src/utils");
+const { mainConfigs, logger } = require("../../src/configs");
 
 describe("Error middlewares", () => {
   describe("Error converter", () => {
@@ -152,7 +152,7 @@ describe("Error middlewares", () => {
     });
 
     test("should put the error stack in the response if in development mode", () => {
-      config.env = "development";
+      mainConfigs.env = "development";
       const error = new ApiError(httpStatus.BAD_REQUEST, "Any error");
       const res = httpMocks.createResponse();
       const sendSpy = jest.spyOn(res, "send");
@@ -166,11 +166,11 @@ describe("Error middlewares", () => {
           stack: error.stack,
         })
       );
-      config.env = process.env.NODE_ENV;
+      mainConfigs.env = process.env.NODE_ENV;
     });
 
     test("should send internal server error status and message if in production mode and error is not operational", () => {
-      config.env = "production";
+      mainConfigs.env = "production";
       const error = new ApiError(httpStatus.BAD_REQUEST, "Any error", false);
       const res = httpMocks.createResponse();
       const sendSpy = jest.spyOn(res, "send");
@@ -184,11 +184,11 @@ describe("Error middlewares", () => {
         })
       );
       expect(res.locals.errorMessage).toBe(error.message);
-      config.env = process.env.NODE_ENV;
+      mainConfigs.env = process.env.NODE_ENV;
     });
 
     test("should preserve original error status and message if in production mode and error is operational", () => {
-      config.env = "production";
+      mainConfigs.env = "production";
       const error = new ApiError(httpStatus.BAD_REQUEST, "Any error");
       const res = httpMocks.createResponse();
       const sendSpy = jest.spyOn(res, "send");
@@ -201,7 +201,7 @@ describe("Error middlewares", () => {
           message: error.message,
         })
       );
-      config.env = process.env.NODE_ENV;
+      mainConfigs.env = process.env.NODE_ENV;
     });
   });
 });
